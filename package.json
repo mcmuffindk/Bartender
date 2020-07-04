@@ -1,0 +1,9 @@
+{
+  "name": "Bartender",
+  "version": "1.0.0",
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "express": "^4.17.1",
+    "onoff": "^6.0.0"
+  }
+}
