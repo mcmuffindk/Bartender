@@ -1,5 +1,5 @@
 //const GPIO = require('onoff').Gpio
-const log = require('./log.js');
+const log = require('loggy');
 //const drinks = require('./drinks.json');
 const express = require('express');
 const app = express();
