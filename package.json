@@ -1,9 +1,30 @@
 {
-  "name": "Bartender",
-  "version": "1.0.0",
+  "name": "bartender",
+  "version": "0.0.1",
   "dependencies": {
     "express": "^4.17.1",
     "loggy": "^1.0.8",
     "onoff": "^6.0.0"
-  }
+  },
+  "description": "Your personal bartender",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "run": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mcmuffindk/Bartender.git"
+  },
+  "keywords": [
+    "Bartender",
+    "Drinks"
+  ],
+  "author": "McMuffinDK, Rasnik22",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mcmuffindk/Bartender/issues"
+  },
+  "homepage": "https://github.com/mcmuffindk/Bartender#readme"
 }
