@@ -4,7 +4,8 @@
   "dependencies": {
     "express": "^4.17.1",
     "loggy": "^1.0.8",
-    "onoff": "^6.0.0"
+    "onoff": "^6.0.0",
+    "socket.io": "^2.3.0"
   },
   "description": "Your personal bartender",
   "main": "index.js",
