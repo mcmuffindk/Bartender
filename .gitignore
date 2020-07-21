@@ -64,6 +64,8 @@ web_modules/
 
 # Output of 'npm pack'
 *.tgz
+# Exclude tohora.tgz
+!tohora.tgz
 
 # Yarn Integrity file
 .yarn-integrity
