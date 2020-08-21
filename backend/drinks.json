@@ -1,8 +1,8 @@
 {
-  rumCoke: {
-    ingredients: {
-      rum: 2,
-      coke: 10
+  "rumCoke": {
+    "ingredients": {
+      "rum": 2,
+      "coke": 10
     }
   }
 }
