@@ -1,8 +1,72 @@
 {
-  "rumCoke": {
+  "template": {
+    "name": "Template",
+    "description": "This is a cocktail card template",
+    "tags": ["Template"],
+    "img": "cocktail_placeholder.png",
     "ingredients": {
-      "rum": 2,
-      "coke": 10
+      "ingredient1": 2,
+      "ingredient2": 10
+    }
+  },
+  "template2": {
+    "name": "Template2",
+    "description": "This is a cocktail card template",
+    "tags": ["Template2"],
+    "img": "cocktail_placeholder.png",
+    "ingredients": {
+      "ingredient1": 2,
+      "ingredient2": 10
+    }
+  },
+  "template3": {
+    "name": "Template3",
+    "description": "This is a cocktail card template",
+    "tags": ["Template3"],
+    "img": "cocktail_placeholder.png",
+    "ingredients": {
+      "ingredient1": 2,
+      "ingredient2": 10
+    }
+  },
+  "template4": {
+    "name": "Template 4",
+    "description": "This is a cocktail card template",
+    "tags": ["Template4"],
+    "img": "cocktail_placeholder.png",
+    "ingredients": {
+      "ingredient1": 2,
+      "ingredient2": 10
+    }
+  },
+  "template5": {
+    "name": "Template 5",
+    "description": "This is a cocktail card template",
+    "tags": ["Template5"],
+    "img": "cocktail_placeholder.png",
+    "ingredients": {
+      "ingredient1": 2,
+      "ingredient2": 10
+    }
+  },
+  "template6": {
+    "name": "Template 6",
+    "description": "This is a cocktail card template",
+    "tags": ["Template6"],
+    "img": "cocktail_placeholder.png",
+    "ingredients": {
+      "ingredient1": 2,
+      "ingredient2": 10
+    }
+  },
+  "template7": {
+    "name": "Template 7",
+    "description": "This is a cocktail card template",
+    "tags": ["Template7"],
+    "img": "cocktail_placeholder.png",
+    "ingredients": {
+      "ingredient1": 2,
+      "ingredient2": 10
     }
   }
 }
