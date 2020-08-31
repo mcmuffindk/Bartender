@@ -18,7 +18,7 @@
   <script type="text/javascript">
   $($.getJSON("./drinks.json", (data) => {
     $.each(data, (key, value) => {
-      var html = `<div class="w-1/3 px-8 pt-8">
+      var html = `<div class="w-1/3 px-8 pt-8 m-auto">
       <div class="h-auto">
       <div class="max-w-sm rounded overflow-hidden shadow-lg m-auto">
       <img class="w-full" src="/img/${value.img}" alt="${value.name}">
@@ -45,7 +45,77 @@
 
 <body>
   <div class="px-2">
-    <div id="cocktails-holder" class="flex flex-wrap -mx-2">
+    <div id="cocktail_info" class="/*hidden*/ flex -mx-2">
+
+
+
+
+      <div class="h-screen w-full max-w-full flex p-8">
+
+
+        <img class="lg:w-auto flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l" style="max-width: 41.876%" src="/img/cocktail_placeholder.png">
+
+
+        <div class="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+
+
+          <div class="mb-8">
+            <div id="cocktail_name" class="text-gray-900 font-bold text-xl mb-2">Template</div>
+            <p id="cocktail_description" class="text-gray-700 text-base">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.</p>
+          </div>
+
+
+          <div class="flex">
+
+
+            <div class="w-1/3 text-center">
+              <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                Single
+              </button>
+            </div>
+
+
+            <div class="w-1/3 text-center">
+              <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full opacity-0">
+                Double
+              </button>
+            </div>
+
+
+            <div class="w-1/3 text-center">
+              <button class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">Cancel
+              </button>
+            </div>
+
+
+          </div>
+
+
+        </div>
+
+
+
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+    <div id="cocktails-holder" class="hidden flex flex-wrap -mx-2">
       <!-- Cocktail Cards -->
     </div>
   </div>
