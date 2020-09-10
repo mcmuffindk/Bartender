@@ -1,4 +1,4 @@
-//const GPIO = require('onoff').Gpio
+const GPIO = require('onoff').Gpio
 const log = require('loggy');
 const drinks = require('./static/drinks.json');
 const express = require('express');
