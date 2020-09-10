@@ -7,7 +7,7 @@ const app = express();
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 const port = process.env.PORT || 1337;
-
+// TEST
 // GPIO
 const relay1 = gpio.export(21, {
    direction: gpio.DIRECTION.OUT,
