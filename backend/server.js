@@ -10,84 +10,84 @@ const port = process.env.PORT || 1337;
 
 // GPIO
 const relay1 = gpio.export(21, {
-   direction: gpio.DIRECTION.OUT,
-   ready: function() {
-   }
+  direction: gpio.DIRECTION.OUT,
+  ready: function() {
+  }
 });
 const relay2 = gpio.export(20, {
-   direction: gpio.DIRECTION.OUT,
-   ready: function() {
-   }
+  direction: gpio.DIRECTION.OUT,
+  ready: function() {
+  }
 });
 const relay3 = gpio.export(26, {
-   direction: gpio.DIRECTION.OUT,
-   ready: function() {
-   }
+  direction: gpio.DIRECTION.OUT,
+  ready: function() {
+  }
 });
 const relay4 = gpio.export(16, {
-   direction: gpio.DIRECTION.OUT,
-   ready: function() {
-   }
+  direction: gpio.DIRECTION.OUT,
+  ready: function() {
+  }
 });
 const relay5 = gpio.export(19, {
-   direction: gpio.DIRECTION.OUT,
-   ready: function() {
-   }
+  direction: gpio.DIRECTION.OUT,
+  ready: function() {
+  }
 });
 const relay6 = gpio.export(13, {
-   direction: gpio.DIRECTION.OUT,
-   ready: function() {
-   }
+  direction: gpio.DIRECTION.OUT,
+  ready: function() {
+  }
 });
 const relay7 = gpio.export(12, {
-   direction: gpio.DIRECTION.OUT,
-   ready: function() {
-   }
+  direction: gpio.DIRECTION.OUT,
+  ready: function() {
+  }
 });
 const relay8 = gpio.export(6, {
-   direction: gpio.DIRECTION.OUT,
-   ready: function() {
-   }
+  direction: gpio.DIRECTION.OUT,
+  ready: function() {
+  }
 });
 const relay9 = gpio.export(5, {
-   direction: gpio.DIRECTION.OUT,
-   ready: function() {
-   }
+  direction: gpio.DIRECTION.OUT,
+  ready: function() {
+  }
 });
 const relay10 = gpio.export(25, {
-   direction: gpio.DIRECTION.OUT,
-   ready: function() {
-   }
+  direction: gpio.DIRECTION.OUT,
+  ready: function() {
+  }
 });
 const relay11 = gpio.export(24, {
-   direction: gpio.DIRECTION.OUT,
-   ready: function() {
-   }
+  direction: gpio.DIRECTION.OUT,
+  ready: function() {
+  }
 });
 const relay12 = gpio.export(23, {
-   direction: gpio.DIRECTION.OUT,
-   ready: function() {
-   }
+  direction: gpio.DIRECTION.OUT,
+  ready: function() {
+  }
 });
 const relay13 = gpio.export(22, {
-   direction: gpio.DIRECTION.OUT,
-   ready: function() {
-   }
+  direction: gpio.DIRECTION.OUT,
+  ready: function() {
+  }
 });
 const relay14 = gpio.export(27, {
-   direction: gpio.DIRECTION.OUT,
-   ready: function() {
-   }
+  direction: gpio.DIRECTION.OUT,
+  ready: function() {
+  }
 });
 const relay15 = gpio.export(18, {
-   direction: gpio.DIRECTION.OUT,
-   ready: function() {
-   }
+  direction: gpio.DIRECTION.OUT,
+  ready: function() {
+  }
 });
 const relay16 = gpio.export(17, {
-   direction: gpio.DIRECTION.OUT,
-   ready: function() {
-   }
+  direction: gpio.DIRECTION.OUT,
+  ready: function() {
+  }
 });
 
 // ExpressJS
@@ -109,7 +109,11 @@ io.on('connection', (socket) => {
     do {
       mix(drink, progress, (state) => {
         progress = state;
-        socket.emit('progress', progress);
+        if (progress < 0) {
+          socket.emit('progress', progress);
+        } else {
+          socket.emit('err', 'Can\'t mix that drink right now');
+        }
       });
     } while (progress < 100 && progress > -1);
   });
@@ -123,7 +127,6 @@ io.on('connection', (socket) => {
 
 
 // Drink mixer
-
 var drink_switch_state = 0; // State of mixer
 
 const mix = (drink, progress, newProgress) => {
@@ -136,7 +139,7 @@ const mix = (drink, progress, newProgress) => {
     }
     break;
     case 1:
-      drinks[drink]['ingredients']
+    console.log(drinks[drink]['ingredients']);
     break;
     default:
 
