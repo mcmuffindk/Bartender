@@ -4,6 +4,8 @@
   "dependencies": {
     "express": "^4.17.1",
     "gpio": "^0.2.10",
+    "jquery": "^3.5.1",
+    "jsdom": "^16.4.0",
     "loggy": "^1.0.8",
     "socket.io": "^2.3.0"
   },

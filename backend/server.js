@@ -1,94 +1,118 @@
 const gpio = require('gpio');
 const log = require('loggy');
+const config = require('./config.js');
 const drinks = require('./static/drinks.json');
+const { JSDOM } = require( "jsdom" );
+const { window } = new JSDOM( "" );
+const $ = require( "jquery" )( window );
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
-const port = process.env.PORT || 1337;
+const port = process.env.PORT || config.port;
 
 // GPIO
-const relay1 = gpio.export(21, {
+const relay1 = gpio.export(config.relay1, {
   direction: gpio.DIRECTION.OUT,
-  ready: function() {
+  ready: () => {
   }
 });
-const relay2 = gpio.export(20, {
+const relay2 = gpio.export(config.relay2, {
   direction: gpio.DIRECTION.OUT,
-  ready: function() {
+  ready: () => {
   }
 });
-const relay3 = gpio.export(26, {
+const relay3 = gpio.export(config.relay3, {
   direction: gpio.DIRECTION.OUT,
-  ready: function() {
+  ready: () => {
   }
 });
-const relay4 = gpio.export(16, {
+const relay4 = gpio.export(config.relay4, {
   direction: gpio.DIRECTION.OUT,
-  ready: function() {
+  ready: () => {
   }
 });
-const relay5 = gpio.export(19, {
+const relay5 = gpio.export(config.relay5, {
   direction: gpio.DIRECTION.OUT,
-  ready: function() {
+  ready: () => {
   }
 });
-const relay6 = gpio.export(13, {
+const relay6 = gpio.export(config.relay6, {
   direction: gpio.DIRECTION.OUT,
-  ready: function() {
+  ready: () => {
   }
 });
-const relay7 = gpio.export(12, {
+const relay7 = gpio.export(config.relay7, {
   direction: gpio.DIRECTION.OUT,
-  ready: function() {
+  ready: () => {
   }
 });
-const relay8 = gpio.export(6, {
+const relay8 = gpio.export(config.relay8, {
   direction: gpio.DIRECTION.OUT,
-  ready: function() {
+  ready: () => {
   }
 });
-const relay9 = gpio.export(5, {
+const relay9 = gpio.export(config.relay9, {
   direction: gpio.DIRECTION.OUT,
-  ready: function() {
+  ready: () => {
   }
 });
-const relay10 = gpio.export(25, {
+const relay10 = gpio.export(config.relay10, {
   direction: gpio.DIRECTION.OUT,
-  ready: function() {
+  ready: () => {
   }
 });
-const relay11 = gpio.export(24, {
+const relay11 = gpio.export(config.relay11, {
   direction: gpio.DIRECTION.OUT,
-  ready: function() {
+  ready: () => {
   }
 });
-const relay12 = gpio.export(23, {
+const relay12 = gpio.export(config.relay12, {
   direction: gpio.DIRECTION.OUT,
-  ready: function() {
+  ready: () => {
   }
 });
-const relay13 = gpio.export(22, {
+const relay13 = gpio.export(config.relay13, {
   direction: gpio.DIRECTION.OUT,
-  ready: function() {
+  ready: () => {
   }
 });
-const relay14 = gpio.export(27, {
+const relay14 = gpio.export(config.relay14, {
   direction: gpio.DIRECTION.OUT,
-  ready: function() {
+  ready: () => {
   }
 });
-const relay15 = gpio.export(18, {
+const relay15 = gpio.export(config.relay15, {
   direction: gpio.DIRECTION.OUT,
-  ready: function() {
+  ready: () => {
   }
 });
-const relay16 = gpio.export(17, {
+const relay16 = gpio.export(config.relay16, {
   direction: gpio.DIRECTION.OUT,
-  ready: function() {
+  ready: () => {
   }
 });
+
+// Bind ingredients to pumps
+const pump_bindings = {
+  [config.ingredient1]: relay1,
+  [config.ingredient2]: relay2,
+  [config.ingredient3]: relay3,
+  [config.ingredient4]: relay4,
+  [config.ingredient5]: relay5,
+  [config.ingredient6]: relay6,
+  [config.ingredient7]: relay7,
+  [config.ingredient8]: relay8,
+  [config.ingredient9]: relay9,
+  [config.ingredient10]: relay10,
+  [config.ingredient11]: relay11,
+  [config.ingredient12]: relay12,
+  [config.ingredient13]: relay13,
+  [config.ingredient14]: relay14,
+  [config.ingredient15]: relay15,
+  [config.ingredient16]: relay16
+}
 
 // ExpressJS
 app.use(express.static('static'));
@@ -105,17 +129,13 @@ io.on('connection', (socket) => {
   log.info('Kiosk connected'); // change
   socket.on('drink type', (drink) => {
     log.info('Now mixing', drink);
-    var progress = 0;
-    do {
-      mix(drink, progress, (state) => {
-        progress = state;
-        if (progress < 0) {
-          socket.emit('progress', progress);
-        } else {
-          socket.emit('err', 'Can\'t mix that drink right now');
-        }
-      });
-    } while (progress < 100 && progress > -1);
+    checkDrink(drink, (res) => {
+      if (res) {
+        socket.emit('res', "success"); // Change text
+      } else {
+        socket.emit('res', "failed"); // Change text
+      }
+    });
   });
   socket.on('disconnect', () => {
     log.warn('Kiosk disconnected'); // change
@@ -127,21 +147,59 @@ io.on('connection', (socket) => {
 
 
 // Drink mixer
-var drink_switch_state = 0; // State of mixer
 
-const mix = (drink, progress, newProgress) => {
-  switch (drink_switch_state) {
-    case 0:
-    if (drinks.hasOwnProperty(drink)) {
-      drink_switch_state = 1;
-    } else {
-      newProgress(-1);
+// Check if drink exists and if all ingredients are available
+const checkDrink = (drink, res) => {
+  if (drinks.hasOwnProperty(drink)) {
+    var valid = 1;
+    for (var i = 0; i <= Object.keys(drinks[drink]['ingredients']).length; i++) {
+      if (i < Object.keys(drinks[drink]['ingredients']).length) {
+        if (!pump_bindings.hasOwnProperty(ingredient)) {
+          valid = 0;
+        }
+      } else {
+        if (valid) {
+          mix(drink, (response) => {
+            res(response)
+          });
+        } else {
+          res(-1);
+        }
+      }
     }
-    break;
-    case 1:
-    console.log(drinks[drink]['ingredients']);
-    break;
-    default:
-
   }
+}
+
+
+const mix = (drink, response) => {
+  var suc = 1;
+  var i = 1;
+  $.each(drinks[drink]['ingredients'], (ingredient, volume) => {
+
+    if (i < Object.keys(drinks[drink]['ingredients']).length) {
+      pump(ingredient, volume, (res) => {
+        suc = res;
+      });
+    }
+
+    if (i = Object.keys(drinks[drink]['ingredients']).length) {
+      pump(ingredient, volume, (res) => {
+        suc = res;
+        response(suc);
+      });
+    }
+
+    i++;
+  })
+}
+
+
+const pump = (ingredient, volume, res) => {
+  pump_bindings[ingredient].set(1); // Start pump
+  console.log(pump_bindings[ingredient]);
+  setTimeout(() => {
+    pump_bindings[ingredient].set(0); // Stop pump
+    console.log(pump_bindings[ingredient]);
+    res(1);
+  }, volume * config.volMillis);
 }
