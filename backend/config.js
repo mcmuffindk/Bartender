@@ -20,7 +20,7 @@ const config = {
   ingredient16: "ingredient16",
 
   // listen PORT
-  port: 1337;
+  port: 1337,
 
   // GPIO ports
   relay1: 21,
