@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Error - Bartender App</title>
+  <link type="text/css" rel="stylesheet" href="/css/tailwind.min.css">
+  <script type="text/javascript" src="/js/jquery-3.5.1.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script type="text/javascript">
+    var socket = io();
+
+    socket.on('err', (msg) => {
+      $('#error-list').append('<b>' + msg.err + '</b> ' + msg.msg + '<br>');
+    });
+  </script>
+</head>
+
+<body>
+  <div class="px-2">
+    <div id="error-list">
+
+    </div>
+  </div>
+</body>
+
+</html>
