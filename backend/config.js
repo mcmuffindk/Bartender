@@ -2,22 +2,22 @@ const config = {
   volMillis: process.env.volMillis || 1.6, // Milliliter pr. millisecond
 
   // ingredient binding
-  ingredient1: process.env.ingredient1 || "undefined", // Ingredient on pump 1
-  ingredient2: process.env.ingredient2 || "ingredient2", // Ingredient on pump 2
-  ingredient3: process.env.ingredient3 || "ingredient3", // Ingredient on pump 3
-  ingredient4: process.env.ingredient4 || "ingredient4", // Ingredient on pump 4
-  ingredient5: process.env.ingredient5 || "ingredient5", // Ingredient on pump 5
-  ingredient6: process.env.ingredient6 || "ingredient6", // Ingredient on pump 6
-  ingredient7: process.env.ingredient7 || "ingredient7", // Ingredient on pump 7
-  ingredient8: process.env.ingredient8 || "ingredient8", // Ingredient on pump 8
-  ingredient9: process.env.ingredient9 || "ingredient9", // Ingredient on pump 9
-  ingredient10: process.env.ingredient10 || "ingredient10", // Ingredient on pump 10
-  ingredient11: process.env.ingredient11 || "ingredient11", // Ingredient on pump 11
-  ingredient12: process.env.ingredient12 || "ingredient12", // Ingredient on pump 12
-  ingredient13: process.env.ingredient13 || "ingredient13", // Ingredient on pump 13
-  ingredient14: process.env.ingredient14 || "ingredient14", // Ingredient on pump 14
-  ingredient15: process.env.ingredient15 || "ingredient15", // Ingredient on pump 15
-  ingredient16: process.env.ingredient16 || "ingredient16", // Ingredient on pump 16
+  ingredient1: process.env.ingredient1 || undefined, // Ingredient on pump 1
+  ingredient2: process.env.ingredient2 || undefined, // Ingredient on pump 2
+  ingredient3: process.env.ingredient3 || undefined, // Ingredient on pump 3
+  ingredient4: process.env.ingredient4 || undefined, // Ingredient on pump 4
+  ingredient5: process.env.ingredient5 || undefined, // Ingredient on pump 5
+  ingredient6: process.env.ingredient6 || undefined, // Ingredient on pump 6
+  ingredient7: process.env.ingredient7 || undefined, // Ingredient on pump 7
+  ingredient8: process.env.ingredient8 || undefined, // Ingredient on pump 8
+  ingredient9: process.env.ingredient9 || undefined, // Ingredient on pump 9
+  ingredient10: process.env.ingredient10 || undefined, // Ingredient on pump 10
+  ingredient11: process.env.ingredient11 || undefined, // Ingredient on pump 11
+  ingredient12: process.env.ingredient12 || undefined, // Ingredient on pump 12
+  ingredient13: process.env.ingredient13 || undefined, // Ingredient on pump 13
+  ingredient14: process.env.ingredient14 || undefined, // Ingredient on pump 14
+  ingredient15: process.env.ingredient15 || undefined, // Ingredient on pump 15
+  ingredient16: process.env.ingredient16 || undefined, // Ingredient on pump 16
 
   // listen PORT
   port: process.env.PORT || 80,
