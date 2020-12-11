@@ -1,86 +1,87 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Bartender App</title>
   <link type="text/css" rel="stylesheet" href="/css/tailwind.min.css">
-  <link type="text/css" rel="stylesheet" href="/css/styles.css">
   <script type="text/javascript" src="/js/jquery-3.5.1.min.js"></script>
-  <script type="text/javascript" src="/js/scripts.js"></script>
   <script src="/socket.io/socket.io.js"></script>
   <script type="text/javascript">
-  var socket = io();
+    var socket = io();
 
-  socket.on('res', (msg) => {
-    $('#progress').text(msg)
-  });
+    socket.on('res', (msg) => {
+      $('#progress').text(msg)
+    });
 
-  var mix = (drink) => {
-    socket.emit('drink type', drink);
-  };
+    var mix = (drink) => {
+      socket.emit('drink type', drink);
+    };
   </script>
   <script type="text/javascript">
-  $($.getJSON("./drinks.json", (data) => {
-    $.each(data, (key, value) => {
-      let html = `<div id="${key}-card" class="w-1/3 px-8 pt-8 m-auto">
-      <div class="h-auto">
-      <div class="max-w-sm rounded overflow-hidden shadow-lg m-auto">
-      <img class="w-full" src="/img/${value.img}" alt="${value.name}">
-      <div class="px-6 py-4">
-      <div class="font-bold text-xl mb-2">${value.name}</div>
-      <p class="text-gray-700 text-base">${value.description}</p>
-      </div>
-      <div id="${key}-tags" class="px-6 pt-4 pb-2"></div>
-      </div>
-      </div>
-      </div>`;
+    $($.getJSON("./drinks.json", (data) => {
+      $.each(data, (key, value) => {
+        let html =
+          `<div id="${key}-card" class="w-1/3 px-8 pt-8 hidden">
+          <div class="h-auto">
+          <div class="max-w-sm rounded overflow-hidden shadow-lg m-auto">
+          <img class="w-full" src="/img/${value.img}" alt="${value.name}">
+          <div class="px-6 py-4">
+          <div class="font-bold text-xl mb-2">${value.name}</div>
+          <p class="text-gray-700 text-base">${value.description}</p>
+          </div>
+          <div id="${key}-tags" class="px-6 pt-4 pb-2"></div>
+          </div>
+          </div>
+          </div>`;
 
-      let info_html = `<div class="h-screen w-full max-w-full flex p-8">
-      <img class="lg:w-auto flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l" style="max-width: 41.876%" src="/img/${value.img}" alt="${value.name}">
-      <div class="w-full border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
-      <div class="mb-8">
-      <div id="cocktail_name" class="text-gray-900 font-bold text-xl mb-2">${value.name}</div>
-      <p id="cocktail_description" class="text-gray-700 text-base">${value.description}</p>
-      </div>
-      <div class="flex">
-      <div class="w-1/3 text-center">
-      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onClick="mix('${key}')">
-      Single
-      </button>
-      </div>
-      <div class="w-1/3 text-center">
-      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full opacity-0">
-      Double
-      </button>
-      </div>
-      <div class="w-1/3 text-center">
-      <button class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full" onClick="closeInfo()">
-      Cancel
-      </button>
-      </div>
-      </div>
-      </div>
-      </div>`;
+        let info_html =
+          `<div class="h-screen w-full max-w-full flex p-8">
+          <img class="lg:w-auto flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l" style="max-width: 41.876%" src="/img/${value.img}" alt="${value.name}">
+          <div class="w-full border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+          <div class="mb-8">
+          <div id="cocktail_name" class="text-gray-900 font-bold text-xl mb-2">${value.name}</div>
+          <p id="cocktail_description" class="text-gray-700 text-base">${value.description}</p>
+          </div>
+          <div class="flex">
+          <div class="w-1/3 text-center">
+          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onClick="mix('${key}')">
+          Single
+          </button>
+          </div>
+          <div class="w-1/3 text-center">
+          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full opacity-0">
+          Double
+          </button>
+          </div>
+          <div class="w-1/3 text-center">
+          <button class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full" onClick="closeInfo()">
+          Cancel
+          </button>
+          </div>
+          </div>
+          </div>
+          </div>`;
 
-      $("#cocktails-holder").append(html);
+        $("#cocktails-holder").append(html);
 
-      $.each(value.tags, (index, value) => {
-        $(`#${key}-tags`).append(`<span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#${value}</span>`);
+        $.each(value.tags, (index, value) => {
+          $(`#${key}-tags`).append(`<span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#${value}</span>`);
+        });
+
+        $(`#${key}-card`).click(() => {
+          $("#cocktail_info").html(info_html);
+          $("#cocktail_info").show();
+          $("#cocktails-holder").hide();
+        });
+
       });
+      $("#cocktails-holder").append(`<div class="w-full pt-8">`);
+    }));
 
-      $(`#${key}-card`).click(() => {
-        $("#cocktail_info").html(info_html);
-        $("#cocktail_info").show();
-        $("#cocktails-holder").hide();
-      });
-
-    });
-    $("#cocktails-holder").append(`<div class="w-full pt-8">`);
-  }));
-
-  var closeInfo = () => {
-    $("#cocktail_info").hide();
-    $("#cocktails-holder").show();
-  };
+    var closeInfo = () => {
+      $("#cocktail_info").hide();
+      $("#cocktails-holder").show();
+    };
   </script>
 </head>
 
@@ -89,9 +90,12 @@
     <div id="cocktail_info" class="hidden flex -mx-2">
       <!-- Cocktail Info -->
     </div>
-    <div id="cocktails-holder" class="flex flex-wrap -mx-2">
+    <div id="cocktails-holder" class="flex flex-wrap m-auto relative">
+      <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+      <a class="next" onclick="plusSlides(1)">&#10095;</a>
       <!-- Cocktail Cards -->
     </div>
   </div>
 </body>
+
 </html>

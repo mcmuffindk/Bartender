@@ -10,7 +10,8 @@ const bodyParser = require('body-parser');
 const app = express();
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
-const port = process.env.PORT || config.port;
+const port = config.port || 1337;
+var errors = [];
 
 // GPIO
 const relay1 = gpio.export(config.relay1, {
@@ -114,12 +115,26 @@ const pump_bindings = {
   [config.ingredient16]: relay16
 }
 
+// Check for config errors
+for (var key in config) {
+  // Check for errors in ingredients
+    if (key.includes('ingredient')) {
+        if (config[key] === undefined) {
+          errors.push({'err': "error", 'msg': key + ' is undefined, if not to be used please assing as null'});
+        }
+    }
+}
+
 // ExpressJS
 app.use(express.static('static'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-  res.sendFile('index.html', {root: __dirname});
+  if (errors.length > 0) {
+    res.sendFile('error.html', {root: __dirname});
+  } else {
+    res.sendFile('index.html', {root: __dirname});
+  }
 });
 
 http.listen(port, log.info(`Bartender App is now running and listening on port ${port}`));
@@ -127,6 +142,13 @@ http.listen(port, log.info(`Bartender App is now running and listening on port $
 // Socket.io
 io.on('connection', (socket) => {
   log.info('Kiosk connected'); // change
+
+if (errors.length > 0) {
+  $.each(errors, (_index, data) => {
+    socket.emit('err', data);
+  });
+}
+
   socket.on('drink type', (drink) => {
     log.info('Now mixing', drink);
     checkDrink(drink, (res) => {
@@ -154,7 +176,7 @@ const checkDrink = (drink, res) => {
     var valid = 1;
     for (var i = 0; i <= Object.keys(drinks[drink]['ingredients']).length; i++) {
       if (i < Object.keys(drinks[drink]['ingredients']).length) {
-        if (!pump_bindings.hasOwnProperty(ingredient)) {
+        if (!pump_bindings.hasOwnProperty(drinks[drink]['ingredients'][i])) {
           valid = 0;
         }
       } else {
