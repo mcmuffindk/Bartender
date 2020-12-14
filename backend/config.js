@@ -20,7 +20,7 @@ const config = {
   ingredient16: process.env.ingredient16 || undefined, // Ingredient on pump 16
 
   // listen PORT
-  port: process.env.PORT || 80,
+  port: 80,
 
   // GPIO ports
   relay1: process.env.relay1 || '21',
