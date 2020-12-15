@@ -17,81 +17,97 @@ var errors = [];
 const relay1 = gpio.export(config.relay1, {
   direction: gpio.DIRECTION.OUT,
   ready: () => {
+    relay1.set(0);
   }
 });
 const relay2 = gpio.export(config.relay2, {
   direction: gpio.DIRECTION.OUT,
   ready: () => {
+    relay2.set(0);
   }
 });
 const relay3 = gpio.export(config.relay3, {
   direction: gpio.DIRECTION.OUT,
   ready: () => {
+    relay3.set(0);
   }
 });
 const relay4 = gpio.export(config.relay4, {
   direction: gpio.DIRECTION.OUT,
   ready: () => {
+    relay4.set(0);
   }
 });
 const relay5 = gpio.export(config.relay5, {
   direction: gpio.DIRECTION.OUT,
   ready: () => {
+    relay5.set(0);
   }
 });
 const relay6 = gpio.export(config.relay6, {
   direction: gpio.DIRECTION.OUT,
   ready: () => {
+    relay6.set(0);
   }
 });
 const relay7 = gpio.export(config.relay7, {
   direction: gpio.DIRECTION.OUT,
   ready: () => {
+    relay7.set(0);
   }
 });
 const relay8 = gpio.export(config.relay8, {
   direction: gpio.DIRECTION.OUT,
   ready: () => {
+    relay8.set(0);
   }
 });
 const relay9 = gpio.export(config.relay9, {
   direction: gpio.DIRECTION.OUT,
   ready: () => {
+    relay9.set(0);
   }
 });
 const relay10 = gpio.export(config.relay10, {
   direction: gpio.DIRECTION.OUT,
   ready: () => {
+    relay10.set(0);
   }
 });
 const relay11 = gpio.export(config.relay11, {
   direction: gpio.DIRECTION.OUT,
   ready: () => {
+    relay11.set(0);
   }
 });
 const relay12 = gpio.export(config.relay12, {
   direction: gpio.DIRECTION.OUT,
   ready: () => {
+    relay12.set(0);
   }
 });
 const relay13 = gpio.export(config.relay13, {
   direction: gpio.DIRECTION.OUT,
   ready: () => {
+    relay13.set(0);
   }
 });
 const relay14 = gpio.export(config.relay14, {
   direction: gpio.DIRECTION.OUT,
   ready: () => {
+    relay14.set(0);
   }
 });
 const relay15 = gpio.export(config.relay15, {
   direction: gpio.DIRECTION.OUT,
   ready: () => {
+    relay15.set(0);
   }
 });
 const relay16 = gpio.export(config.relay16, {
   direction: gpio.DIRECTION.OUT,
   ready: () => {
+    relay16.set(0);
   }
 });
 
